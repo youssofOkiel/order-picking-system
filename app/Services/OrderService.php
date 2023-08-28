@@ -16,8 +16,17 @@ class OrderService
             ->get();
     }
 
-    public function assignOrderToPicker(Order $order, User $picker): Model
+    public function getAssignedOrdersForPicker($picker)
     {
+        return $picker->assignedOrders()->with('order.products.location')->get();
+    }
+
+    public function assignOrderToPicker(Order $order, User $picker): bool|Model
+    {
+        if ($order->pickerAssignment()->exists()){
+            return false;
+        }
+
         return $order->pickerAssignment()->create([
             'picker_id' => $picker->id,
         ]);

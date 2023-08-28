@@ -24,9 +24,12 @@ class OrderSeeder extends Seeder
                 'owner'
             )
             ->hasAttached(
-                Product::factory()->count(5)->has(
-                    Location::factory()->count(1)
-                ),
+                Product::factory()
+                    ->count(5)
+                    ->has(
+                        Location::factory()
+                            ->count(1)
+                    ),
                 ['quantity' => rand(1, 5)]
             )
             ->create();

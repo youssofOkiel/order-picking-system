@@ -17,8 +17,10 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
+            'aisle' => fake()->streetName,
             'shelf' => fake()->numberBetween(1,3),
-            'aisle' => fake()->streetName
+            'box_number' => fake()->numberBetween(1,50),
+            'coordinates' => fake()->localCoordinates
         ];
     }
 }

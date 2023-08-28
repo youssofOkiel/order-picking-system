@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('shelf');
             $table->string('aisle');
+            $table->string('shelf');
+            $table->string('box_number');
+            $table->json('coordinates');
 
             $table->timestamps();
         });

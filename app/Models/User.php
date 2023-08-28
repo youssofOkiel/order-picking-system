@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,16 +50,23 @@ class User extends Authenticatable
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class,'owner_id');
+        return $this->hasMany(Order::class, 'owner_id');
     }
 
     public function assignedOrders(): HasMany
     {
-        return $this->hasMany(Assignment::class,'picker_id');
+        return $this->hasMany(Assignment::class, 'picker_id');
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
     }
 
     public function scopePicker(Builder $query): Builder
     {
-        return  $query->hasRole(Role::Picker);
+        return $query->whereHas('roles', function ($query) {
+            $query->where('name',Role::Picker);
+        });
     }
 }
