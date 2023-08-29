@@ -28,9 +28,8 @@ class OrderObserver
             ]);
         }
 
-        $timeSlot = $order->timeSlot();
-        if ($timeSlot && $timeSlot->orders()->count() == config('delivery-timeslot.slot_capacity')){
-            $timeSlot->update([
+        if ($order->timeSlot?->orders()->count() == config('delivery-timeslot.slot_capacity')) {
+            $order->timeSlot->update([
                 'status' => TimeSlotStatus::Unavailable
             ]);
         }

@@ -14,7 +14,8 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'status'
+        'status',
+        'time_slot_id',
     ];
 
     public function owner(): BelongsTo
