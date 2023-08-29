@@ -13,6 +13,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status'
+    ];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
@@ -30,7 +34,8 @@ class Order extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity');
+        return $this->belongsToMany(Product::class, 'order_products')
+            ->withPivot('id', 'quantity', 'status');
     }
 
     public function scopeStatus(Builder $builder, array $statuses): Builder

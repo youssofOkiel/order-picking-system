@@ -6,6 +6,7 @@ use BenSampo\Enum\Enum;
 
 final class AssignmentStatus extends Enum
 {
-    const Assigned = 'assigned';
+    const Pending = 'pending';
+    const Picking = 'picking';
     const Completed = 'completed';
 }

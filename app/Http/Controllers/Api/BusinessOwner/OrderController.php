@@ -25,10 +25,21 @@ class OrderController extends Controller
         return OrderResource::collection($orders);
     }
 
+    public function pickedOrders(): AnonymousResourceCollection
+    {
+        $orders = $this->orderService->getOrdersWithStatus([OrderStatus::Picked]);
+
+        return OrderResource::collection($orders);
+    }
+
     public function assignToPicker(Order $order, User $picker): JsonResponse
     {
         if (!$picker->hasRole(Role::Picker)) {
             return $this->errorResponse("User should be a picker");
+        }
+
+        if ($picker->assignedOrders()->count() >= $picker->picker_orders_capacity) {
+            return $this->errorResponse("not available picker");
         }
 
         $this->orderService->assignOrderToPicker($order, $picker);

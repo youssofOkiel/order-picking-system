@@ -8,5 +8,7 @@ Route::prefix('business-owners')->group(function () {
     Route::get('pickers', [PickerAssignmentController::class, 'index']);
 
     Route::get('orders', [OrderController::class, 'index']);
+    Route::get('picked-orders', [OrderController::class, 'pickedOrders']);
     Route::get('orders/{order}/pickers/{picker}', [OrderController::class, 'assignToPicker']);
+
 });

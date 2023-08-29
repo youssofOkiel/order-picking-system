@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default(AssignmentStatus::Assigned);
+            $table->string('status')->default(AssignmentStatus::Pending);
             $table->foreignIdFor(Order::class)->constrained();
             $table->foreignId('picker_id')->constrained('users');
 

@@ -10,9 +10,14 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quantity'
+    ];
+
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class, 'order_products')->withPivot('quantity');
+        return $this->belongsToMany(Order::class, 'order_products')
+            ->withPivot('quantity');
     }
 
     public function location(): BelongsToMany

@@ -17,10 +17,10 @@ class OrderSeeder extends Seeder
     public function run(): void
     {
         $orders = Order::factory()
-            ->count(5)
+            ->count(50)
             ->has(
                 User::factory()
-                    ->count(5),
+                    ->count(1),
                 'owner'
             )
             ->hasAttached(

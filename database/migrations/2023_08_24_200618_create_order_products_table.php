@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->foreignIdFor(Order::class)->constrained();
             $table->foreignIdFor(Product::class)->constrained();
+            $table->string('status')->default(OrderStatus::Pending);
 
             $table->index(['order_id', 'product_id']);
             $table->timestamps();

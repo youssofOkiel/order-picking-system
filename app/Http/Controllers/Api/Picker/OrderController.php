@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api\Picker;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProductResource;
+use App\Models\Assignment;
 use App\Services\OrderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class OrderController extends Controller
@@ -20,4 +23,5 @@ class OrderController extends Controller
 
         return OrderResource::collection($orders);
     }
+
 }
