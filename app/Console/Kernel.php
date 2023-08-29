@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\ProcessAssignOrderToNearestTimeSlot;
 use App\Jobs\ProcessAutoPickerAssignment;
 use App\Jobs\ProcessCheckCompletedOrder;
 use Illuminate\Console\Scheduling\Schedule;
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->job(new ProcessAutoPickerAssignment())->everyMinute();
         $schedule->job(new ProcessCheckCompletedOrder())->everyMinute();
+        $schedule->job(new ProcessAssignOrderToNearestTimeSlot())->everyMinute();
     }
 
     /**
